@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Mera Website</title>
+  <script src="https://kit.fontawesome.com/a2d9f6a24d.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Optional: better font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("user_YOUR_PUBLIC_KEY"); // <-- yahan apni EmailJS public key daalein (e.g., user_xxx)
+    })();
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      background: linear-gradient(135deg,#f0f4f8,#ffffff);
+      color: #1f2d3a;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card {
+      background: white;
+      border-radius: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px -10px rgba(99,102,241,0.2);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease-out, transform .7s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .language-toggle {
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: background .25s, color .25s, transform .15s;
+      border: 1px solid transparent;
+      display: inline-block;
+    }
+    .language-toggle[data-active="true"] {
+      background: linear-gradient(135deg,#6366f1,#ec4899);
+      color: white;
+    }
+    .language-toggle:hover {
+      transform: scale(1.05);
+      background: rgba(99,102,241,0.1);
+      color: #4f46e5;
+    }
+    .photo-container {
+      overflow: hidden;
+      border-radius: .75rem;
+      display: inline-block;
+      transition: transform .4s ease;
+    }
+    .photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform .5s cubic-bezier(.4,.2,.2,1);
+    }
+    .photo-container:hover .photo {
+      transform: scale(1.12);
+    }
+    .input-shadow {
+      box-shadow: 0 8px 24px -4px rgba(100,116,139,0.08);
+    }
+    .focus-ring:focus-visible {
+      outline: 3px solid rgba(99,102,241,0.7);
+      outline-offset: 2px;
+    }
+    .nav-link {
+      position: relative;
+      font-weight: 600;
+      display: inline-block;
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      transition: width .25s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    footer {
+      background: #1f2937;
+      color: #e2e8f0;
+    }
+    .social a {
+      transition: transform .25s ease, color .25s ease;
+    }
+    .social a:hover {
+      transform: scale(1.15);
+      color: #ec4899;
+    }
+    .error-text {
+      font-size: .65rem;
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="sticky top-0 bg-white/95 backdrop-blur-md shadow-md z-30">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-5 py-4 gap-3">
+      <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+      <nav class="flex gap-6 flex-wrap">
+        <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+        <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+        <a href="gallery.html" class="nav-link text-gray-700 hover:text-indigo-600">Gallery</a>
+        <a href="contact.html" class="nav-link text-gray-700 hover:text-indigo-600">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3 ml-auto">
+        <div class="language-toggle" data-lang="en" data-active="true">English</div>
+        <div class="language-toggle" data-lang="hi">हिन्दी</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="max-w-3xl mx-auto px-5 py-16">
+    <div class="text-center mb-10">
+      <h1 class="text-5xl font-extrabold gradient-text mb-2">Contact</h1>
+      <p class="text-gray-600">Aap mujhse asaani se sampark kar sakte hain — neeche form bharein ya seedha email bhejein.</p>
+    </div>
+
+    <div class="card reveal p-8 space-y-6">
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Left: optional avatar/photo -->
+        <div class="flex-shrink-0">
+          <div class="photo-container w-36 h-36">
+            <img src="D:\my website\wallpaper17.jpg" alt="Profile" class="photo rounded-full shadow-md">
+          </div>
+        </div>
+        <!-- Right: form + text -->
+        <div class="flex-1 space-y-4">
+          <p class="lang-en text-gray-700">
+            Aap mujhse sampark karne ke liye niche form bhar sakte hain ya direct email bhej sakte hain.
+          </p>
+          <p class="lang-hi lang-hide text-gray-700">
+            आप मुझसे संपर्क करने के लिए नीचे का फॉर्म भर सकते हैं या सीधे ईमेल भेज सकते हैं।
+          </p>
+
+          <form id="contact-form" class="space-y-5" novalidate>
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <label for="name" class="block font-medium mb-1">Naam</label>
+                <input id="name" name="name" type="text" placeholder="Aapka Naam" required
+                  class="w-full border rounded-lg px-4 py-3 focus:ring-0 focus:outline-none focus-visible:ring-indigo-500 focus-visible:ring-2 input-shadow transition disabled:opacity-50"
+                  aria-required="true" aria-label="Naam">
+                <div class="error-text" id="error-name" aria-live="polite" style="display:none;">Yeh field zaroori hai.</div>
+              </div>
+              <div>
+                <label for="email" class="block font-medium mb-1">Email</label>
+                <input id="email" name="email" type="email" placeholder="email@example.com" required
+                  class="w-full border rounded-lg px-4 py-3 focus:ring-0 focus:outline-none focus-visible:ring-indigo-500 focus-visible:ring-2 input-shadow transition"
+                  aria-required="true" aria-label="Email">
+                <div class="error-text" id="error-email" aria-live="polite" style="display:none;">Valid email daaliye.</div>
+              </div>
+              <div>
+                <label for="message" class="block font-medium mb-1">Sandesh</label>
+                <textarea id="message" name="message" placeholder="Aapka message" required
+                  class="w-full border rounded-lg px-4 py-3 h-36 resize-none focus:ring-0 focus:outline-none focus-visible:ring-indigo-500 focus-visible:ring-2 input-shadow transition"
+                  aria-required="true" aria-label="Sandesh"></textarea>
+                <div class="error-text" id="error-message" aria-live="polite" style="display:none;">Message likhiye.</div>
+              </div>
+            </div>
+            <div>
+              <button type="submit"
+                class="inline-flex items-center gap-2 px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500 transition">
+                <i class="fas fa-paper-plane"></i>
+                <span class="truncate">Send</span>
+              </button>
+            </div>
+          </form>
+          <p class="text-sm text-gray-500 mt-2">Ya phir direct: <a href="mailto:parirkm1012006@gmail.com" class="text-indigo-600 underline">parirkm1012006@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-14 mt-16">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-5">
+      <div>
+        <div class="footer-title text-xl font-semibold mb-2 text-white">Prayagraj👇</div>
+        <p class="text-sm text-gray-300">[Gaav: Bari Bajahiya, Belsara, Prayagraj,<br> Uttar Pradesh, 212106].</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="footer-title text-xl font-semibold mb-2 text-white">Social👇</div>
+        <div class="flex gap-6 text-2xl social">
+          <a href="#" aria-label="WhatsApp" class="hover:text-green-400"><img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png">whatsApp.com<i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="Instagram" class="hover:text-pink-400"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png">Instagram.com<i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" class="hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title text-xl font-semibold mb-2 text-white">ASIT</div>
+        <p class="text-sm font-semibold text-gray-300">Padhaai:👇</p>
+        <p class="text-sm text-gray-300">'O' Level/ [ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
+        <p class="text-sm font-semibold mt-2 text-gray-300">Shikshak:👇</p>
+        <p class="text-sm text-gray-300">👉Khurshid Alam Sir<br>👉Divyanshu Sir<br>👉Anil Sir</p>
+      </div>
+    </div>
+    <div class="text-center text-xs mt-10 opacity-80 text-gray-400">Rahul Kumar.</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Language toggle
+    const langToggles = document.querySelectorAll('.language-toggle');
+    langToggles.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langToggles.forEach(b => b.setAttribute('data-active', 'false'));
+        btn.setAttribute('data-active', 'true');
+        const lang = btn.getAttribute('data-lang');
+        if (lang === 'hi') {
+          document.querySelectorAll('.lang-en').forEach(e => e.classList.add('lang-hide'));
+          document.querySelectorAll('.lang-hi').forEach(e => e.classList.remove('lang-hide'));
+        } else {
+          document.querySelectorAll('.lang-hi').forEach(e => e.classList.add('lang-hide'));
+          document.querySelectorAll('.lang-en').forEach(e => e.classList.remove('lang-hide'));
+        }
+      });
+    });
+    // Initialize default
+    document.querySelector('[data-lang="en"]')?.click();
+
+    // EmailJS form submit
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let valid = true;
+
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const message = document.getElementById('message');
+
+      // reset errors
+      document.getElementById('error-name').style.display = 'none';
+      document.getElementById('error-email').style.display = 'none';
+      document.getElementById('error-message').style.display = 'none';
+
+      if (!name.value.trim()) {
+        document.getElementById('error-name').style.display = 'block';
+        valid = false;
+      }
+      if (!email.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) {
+        document.getElementById('error-email').style.display = 'block';
+        valid = false;
+      }
+      if (!message.value.trim()) {
+        document.getElementById('error-message').style.display = 'block';
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Prepare template params
+      const templateParams = {
+        from_name: name.value.trim(),
+        reply_to: email.value.trim(),
+        message: message.value.trim()
+      };
+
+      // Send email via EmailJS
+      emailjs.send("service_YOUR_SERVICE_ID", "template_YOUR_TEMPLATE_ID", templateParams)
+        .then(function(response) {
+          alert("Message bhej diya gaya!"); // success
+          form.reset();
+        }, function(error) {
+          console.error("EmailJS error:", error);
+          alert("Kuch galat ho gaya. Dobara try karein.");
+        });
+    });
+  </script>
+</body>
+</html>

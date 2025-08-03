@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rahul Kumar</title>
+  <script src="https://kit.fontawesome.com/a2d9f6a24d.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --card-gradient-1: linear-gradient(135deg,#ff9a9e 0%,#fad0c4 100%);
+      --card-gradient-2: linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%);
+      --card-gradient-3: linear-gradient(135deg,#f6d365 0%,#fda085 100%);
+      --card-gradient-4: linear-gradient(135deg,#89f7fe 0%,#66a6ff 100%);
+      --card-gradient-5: linear-gradient(135deg,#fbc2eb 0%,#a6c1ee 100%);
+    }
+    body {
+      font-family: 'Inter', system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      background: linear-gradient(135deg,#f0f4f9,#ffffff);
+      color: #1f2d3a;
+      scroll-behavior: smooth;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    header {
+      backdrop-filter: saturate(180%) blur(12px);
+    }
+    .nav-link {
+      position: relative;
+      font-weight: 600;
+      padding-bottom: 2px;
+      display: inline-block;
+      color: #374151;
+      transition: color .2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      transition: width .25s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover {
+      color: #6366f1;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .language-toggle {
+      cursor: pointer;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all .25s ease;
+      border: 1px solid transparent;
+      position: relative;
+    }
+    .language-toggle[data-active="true"] {
+      background: linear-gradient(135deg,#6366f1,#ec4899);
+      color: white;
+    }
+    .language-toggle:not([data-active="true"]):hover {
+      background: rgba(99,102,241,0.1);
+      color: #4f46e5;
+    }
+
+    /* Badge styling added */
+    .badge {
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      box-shadow: 0 15px 40px -10px rgba(99,102,241,0.3);
+      transition: transform .25s ease, filter .25s ease;
+    }
+    .badge:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      transition: transform .35s ease, box-shadow .35s ease;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 35px 60px -10px rgba(99,102,241,0.25);
+    }
+    .photo-container {
+      position: relative;
+      overflow: hidden;
+      height: 420px;
+    }
+    .photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.4,.2,.2,1);
+      display: block;
+    }
+    .photo-container:hover .photo {
+      transform: scale(1.15);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease-out, transform .7s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
+ 
+    /* Social icon transition */
+    .social a {
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .social a:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
+    }
+    /* Footer small text */
+    footer p {
+      line-height: 1.4;
+    }
+    /* Responsive adjustment: center columns on small screens */
+    @media (max-width: 768px) {
+      footer .grid {
+        text-align: center;
+      }
+      .footer-title::after {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="sticky top-0 bg-white/90 shadow-md z-30">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4 gap-4">
+      <div class="flex items-center gap-2">
+        <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+        <div class="badge">Portfolio</div>
+      </div>
+      <nav class="flex gap-6 flex-wrap">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3 ml-auto">
+        <div class="language-toggle" data-lang="en" data-active="true">EN</div>
+        <div class="language-toggle" data-lang="hi">HI</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+    <section id="home">
+      <div class="text-center mb-10">
+        <div class="inline-block px-4 py-1 rounded-full bg-indigo-100 text-indigo-700 font-semibold mb-2">Welcome</div>
+        <h1 class="text-5xl font-extrabold gradient-text mb-3">"Hello and welcome to my website — Rahul Kumar."</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto"><font color="red"><i><b>"O Level student on a mission — turning code into creations and learning into success."<br>
+"हर code की line के साथ, मैं अपने सपनों के और करीब पहुँच रहा हूँ।"</b></i></Font></p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="card reveal" style="background: var(--card-gradient-1); color: #1f2d3a;">
+          <div class="photo-container">
+            <img src="D:\my website\wallpaper2.jpg" alt="Photo1" class="photo">
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h2 class="font-semibold text-xl mb-2">Profile👇</h2>
+            <p class="text-sm flex-1">Main ek passionate learner aur creative thinker hoon, jise computer technology aur web development me deep interest hai.
+Coding, designing aur problem-solving mere daily life ka important part ban chuka hai.
+Main hamesha naye tools, technologies aur trends ko seekhne ke liye ready rehta hoon.
+Apne projects ke through main real-world problems ka solution create karne ki koshish karta hoon.
+Discipline, dedication aur creativity meri strength hai jo mujhe alag banati hai.
+Mera aim hai ki apne skills ko use karke ek positive impact create karun.
+Main believe karta hoon ki learning ek continuous process hai jo kabhi khatam nahi hoti.
+
+</p>
+            <div class="mt-4">
+              <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Profile</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card reveal" style="background: var(--card-gradient-2); color: #1f2d3a;">
+          <div class="photo-container">
+            <img src="D:\my website\wallpaper1.jpg" alt="Photo2" class="photo">
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h2 class="font-semibold text-xl mb-2">Interests👇</h2>
+            <p class="text-sm flex-1">Mujhe naye skills seekhne ka bahut shauk hai, especially computer aur technology ke field me.
+Web development, coding aur digital designing mere liye sirf kaam nahi, balki ek passion hai.
+Main hamesha creative ideas ko reality me convert karne ki koshish karta hoon.
+Internet aur new software tools explore karna mujhe inspire karta hai.
+Mujhe problem-solving aur logical thinking ke challenges pasand hain.
+Tech ke saath-saath mujhe creative writing aur designing me bhi interest hai.
+Main believe karta hoon ki learning kabhi stop nahi honi chahiye.</p>
+            <div class="mt-4">
+              <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Interests</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card reveal" style="background: var(--card-gradient-3); color: #1f2d3a;">
+          <div class="photo-container">
+            <img src="D:\my website\wallpaper6.jpg" alt="Photo3" class="photo">
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h2 class="font-semibold text-xl mb-2">Projects👇</h2>
+            <p class="text-sm flex-1">Maine apne learning journey me kai chhote-bade projects banaye hain jo mere skills ko showcase karte hain.
+Ek personal portfolio website design ki, jisme HTML, CSS aur JavaScript ka use kiya.
+School ke liye ek "Student Management System" ka basic model create kiya using Python.
+Responsive web pages banane me experience gain kiya jo mobile aur desktop dono pe smooth work karte hain.
+Ek mini blog website banayi jisme articles post aur manage kiye ja sakte hain.
+Mujhe creative aur functional projects banana pasand hai jo real-world problems solve karein.
+Har project se maine naye tools aur techniques seekhe jo mere career ke liye helpful rahe.</p>
+            <div class="mt-4">
+              <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Projects</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="card reveal" style="background: var(--card-gradient-4); color: #1f2d3a;">
+          <div class="photo-container">
+            <img src="D:\my website\wallpaper12.jpg" alt="Photo4" class="photo">
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h2 class="font-semibold text-xl mb-2">Inspiration👇</h2>
+            <p class="text-sm flex-1">Meri inspiration un logon se aati hai jo apne hard work aur dedication se impossible ko possible banate hain.
+Technology ke legends jaise Steve Jobs aur Sundar Pichai mujhe inspire karte hain ki hamesha innovation ke saath aage badhna chahiye.
+Mujhe apne teachers aur mentors se bhi motivation milti hai jo mujhe sahi direction dikhate hain.
+Internet pe successful developers aur creators ki journey dekh kar mujhe apne dreams pe kaam karne ka junoon milta hai.
+Main believe karta hoon ki challenges hamesha ek nayi opportunity lekar aate hain.
+Mere liye har din ek nayi learning ka chance hai jo mujhe future ke liye s</p>
+            <div class="mt-4">
+              <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Inspiration</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="card reveal" style="background: var(--card-gradient-5); color: #1f2d3a;">
+          <div class="photo-container">
+            <img src="D:\my website\wallpaper16.jpg" alt="Photo5" class="photo">
+          </div>
+          <div class="p-5 flex-1 flex flex-col">
+            <h2 class="font-semibold text-xl mb-2">Goals👇</h2>
+            <p class="text-sm flex-1">Mera short-term goal hai apne technical skills, especially web development aur programming me mastery hasil karna.
+Main chahata hoon ki apne projects ko professional level tak upgrade karu.
+Long-term me main ek successful web developer aur digital creator banna chahta hoon.
+Mera aim hai ki aisi websites aur applications banaun jo logon ki real-life problems solve karein.
+Main apne career me continuous learning aur new technologies ke saath updated rehne ka plan rakhta hoon.
+Future me apna ek startup launch karna bhi mere big dreams me se ek hai.
+Mujhe pata hai ki hard work, dedication aur passion ke saath main apne goals achieve kar sakta hoon.
+
+</p>
+            <div class="mt-4">
+              <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Goals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+ <!-- Head me Font Awesome include karein -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-k6RqeWeci5ZR/Lv4MR0sA0FfDOMsZs9xAqTyVCE5Q+Xk5z6d6Xv6FjG5K0g4oK6P1MZQ+fIBVx9WfXw5x5Kkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-16 mt-20">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
+    <div>
+      <div class="footer-title text-xl font-semibold mb-2">Prayagraj👇</div>
+      <p class="text-sm">[Gaav: Bari Bajahiya, Belsara, Prayagraj,<br> Uttar Pradesh, 212106].</p>
+    </div>
+    <div class="flex flex-col items-center">
+      <div class="footer-title text-xl font-semibold mb-2">Social👇</div>
+      <div class="flex gap-8 text-1g social">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/918112391503" target="_blank" aria-label="WhatsApp" class="hover:text-green-400"><img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png">whatsApp.com
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/rahul_kp_8112" target="_blank" aria-label="Instagram" class="hover:text-pink-400"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png">Instagram.com
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-title text-xl font-semibold mb-2">ASIT</div>
+      <p class="text-sm">Padhai:👇<br> 'O' Level<br>[ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
+    </div>
+  </div>
+  <div class="text-center text-xs mt-10 opacity-70">Rahul Kumar.</div>
+</footer>
+
+
+  <!-- Scripts -->
+  <script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Language toggle stub (for styling active)
+    document.querySelectorAll('.language-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.language-toggle').forEach(b => b.setAttribute('data-active', 'false'));
+        btn.setAttribute('data-active', 'true');
+        // future: switch text language if content multilingual
+      });
+    });
+  </script>
+</body>
+</html>

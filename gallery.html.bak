@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery - Mera Website</title>
+  <script src="https://kit.fontawesome.com/a2d9f6a24d.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Optional: better font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      background: linear-gradient(135deg,#f5f7fa,#ffffff);
+      color: #1f2d3a;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px -10px rgba(99,102,241,0.25);
+    }
+    .photo-container {
+       height: 90%;
+      overflow: hidden;
+      position: relative;
+      border-radius: .75rem;
+    }
+    .photo {
+      width: 100%;
+      display: block;
+      transition: transform .5s cubic-bezier(.4,.2,.2,1);
+    }
+    .photo-container:hover .photo {
+      transform: scale(1.15);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease-out, transform .7s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .language-toggle {
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: background .25s, color .25s, transform .15s;
+      border: 1px solid transparent;
+      display: inline-block;
+    }
+    .language-toggle[data-active="true"] {
+      background: linear-gradient(135deg,#6366f1,#ec4899);
+      color: white;
+    }
+    .language-toggle:hover {
+      transform: scale(1.05);
+      background: rgba(99,102,241,0.08);
+      color: #4f46e5;
+    }
+    .nav-link {
+      position: relative;
+      font-weight: 600;
+      display: inline-block;
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      transition: width .25s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    footer {
+      background: #1f2937;
+      color: #e2e8f0;
+    }
+    .social a {
+      transition: transform .25s ease, color .25s ease;
+    }
+    .social a:hover {
+      transform: scale(1.15);
+      color: #ec4899;
+    }
+    .underline-accent {
+      position: relative;
+    }
+    .underline-accent::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 50px;
+      height: 4px;
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      border-radius: 2px;
+    }
+    /* Responsive tweaks if needed */
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="sticky top-0 bg-white/95 backdrop-blur-md shadow-md z-30">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-5 py-4 gap-3">
+      <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+      <nav class="flex gap-6 flex-wrap">
+        <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
+        <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
+        <a href="gallery.html" class="nav-link text-gray-700 hover:text-indigo-600">Gallery</a>
+        <a href="contact.html" class="nav-link text-gray-700 hover:text-indigo-600">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3 ml-auto">
+        <div class="language-toggle" data-lang="en" data-active="true">English</div>
+        <div class="language-toggle" data-lang="hi">हिन्दी</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-7xl mx-auto px-5 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl font-extrabold gradient-text mb-2">My lovely Friends And Bhai</h1>
+      <p class="text-gray-600"> Meri life ki kuch yaadein, pal aur nazare—yahan dekhiye.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Gallery item 1 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper25.jpg" alt="Gallery1" class="photo w-full h-auto">
+        </div>
+      </div>
+      <!-- Gallery item 2 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper24.jpg" alt="Gallery2" class="photo w-full h-auto">
+        </div>
+      </div>
+      <!-- Gallery item 3 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper3.jpg" alt="Gallery3" class="photo w-full h-auto">
+        </div>
+      </div>
+      <!-- Gallery item 4 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper23.jpg" alt="Gallery4" class="photo w-full h-auto">
+        </div>
+      </div>
+      <!-- Gallery item 5 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper18.jpg" alt="Gallery5" class="photo w-full h-auto">
+        </div>
+      </div>
+      <!-- Gallery item 6 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper19.jpg" alt="Gallery6" class="photo w-full h-auto">
+        </div>
+      </div>
+	  <!-- Gallery item 7 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper20.jpg" alt="Gallery6" class="photo w-full h-auto">
+        </div>
+      </div>
+	  <!-- Gallery item 8 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper21.jpg" alt="Gallery6" class="photo w-full h-auto">
+        </div>
+      </div>
+	   <!-- Gallery item 9 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper7.jpg" alt="Gallery6" class="photo w-full h-auto">
+        </div>
+      </div>
+	  <!-- Gallery item 10 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper22.jpg" alt="Gallery6" class="photo w-full h-auto">
+        </div>
+      </div>
+	   <!-- Gallery item 11 -->
+      <div class="card reveal">
+        <div class="photo-container">
+          <img src="D:\my website\wallpaper11.jpg" alt="Gallery6" class="photo w-full h-auto">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-14 mt-16">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-5">
+      <div>
+        <div class="footer-title text-xl font-semibold mb-2">Prayagraj👇</div>
+        <p class="text-sm">[Gaav: Bari Bajahiya, Belsara, Prayagraj,<br> Uttar Pradesh, 212106].</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="footer-title text-xl font-semibold mb-2">Social👇</div>
+        <div class="flex gap-6 text-2xl social">
+          <a href="#" aria-label="WhatsApp" class="hover:text-green-400"><img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="Instagram" class="hover:text-pink-400"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" class="hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title text-xl font-semibold mb-2">ASIT</div>
+        <p class="text-sm font-semibold">Padhaai:👇</p>
+        <p class="text-sm">'O' Level/ [ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
+        <p class="text-sm font-semibold mt-2">Shikshak:👇</p>
+        <p class="text-sm">👉Khurshid Alam Sir<br>👉Divyanshu Sir<br>👉Anil Sir</p>
+      </div>
+    </div>
+    <div class="text-center text-xs mt-10 opacity-80 text-gray-300">Rahul Kumar.</div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Language toggle (stub - extend as needed)
+    const langToggles = document.querySelectorAll('.language-toggle');
+    langToggles.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langToggles.forEach(b => b.setAttribute('data-active', 'false'));
+        btn.setAttribute('data-active', 'true');
+        const lang = btn.getAttribute('data-lang');
+        // Placeholder: extend for multilingual captions or alt-texts
+        // Currently only sets active styling
+      });
+    });
+  </script>
+</body>
+</html>
