@@ -6,20 +6,101 @@
   <title>About - Mera Website</title>
   <script src="https://kit.fontawesome.com/a2d9f6a24d.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Optional better font -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --card-gradient-1: linear-gradient(135deg,#ff9a9e 0%,#fad0c4 100%);
+      --card-gradient-2: linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%);
+      --card-gradient-3: linear-gradient(135deg,#f6d365 0%,#fda085 100%);
+      --card-gradient-4: linear-gradient(135deg,#89f7fe 0%,#66a6ff 100%);
+      --card-gradient-5: linear-gradient(135deg,#fbc2eb 0%,#a6c1ee 100%);
+    }
+
     body {
       font-family: 'Inter', system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      background: linear-gradient(135deg,#f0f4f8,#ffffff);
+      background: linear-gradient(135deg,#e0e7ff,#cffafe);
+      color: #1f2d3a;
+      scroll-behavior: smooth;
+      margin: 0;
     }
+
     .gradient-text {
       background: linear-gradient(90deg,#6366f1,#ec4899);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
+    header {
+      backdrop-filter: saturate(180%) blur(12px);
+      background: rgba(255,255,255,0.9);
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 600;
+      padding-bottom: 2px;
+      display: inline-block;
+      color: #374151;
+      transition: color .2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      transition: width .25s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover {
+      color: #6366f1;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .language-toggle {
+      cursor: pointer;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all .25s ease;
+      border: 1px solid transparent;
+      position: relative;
+    }
+    .language-toggle[data-active="true"] {
+      background: linear-gradient(135deg,#6366f1,#ec4899);
+      color: white;
+    }
+    .language-toggle:not([data-active="true"]):hover {
+      background: rgba(99,102,241,0.1);
+      color: #4f46e5;
+    }
+
+    .badge {
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      box-shadow: 0 15px 40px -10px rgba(99,102,241,0.3);
+      transition: transform .25s ease, filter .25s ease;
+    }
+    .badge:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
     .card {
       position: relative;
       overflow: hidden;
@@ -38,24 +119,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .language-toggle {
-      cursor: pointer;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      transition: background .25s, color .25s, transform .15s;
-      border: 1px solid transparent;
-    }
-    .language-toggle[data-active="true"] {
-      background: linear-gradient(135deg,#6366f1,#ec4899);
-      color: white;
-    }
-    .language-toggle:hover {
-      transform: scale(1.05);
-      background: rgba(99,102,241,0.1);
-      color: #4f46e5;
-    }
+
     .photo-container {
       overflow: hidden;
       border-radius: 0.75rem;
@@ -68,43 +132,47 @@
     .photo-container:hover .photo {
       transform: scale(1.12);
     }
-    .nav-link {
-      position: relative;
-      font-weight: 600;
-      display: inline-block;
+
+    footer.footer-custom {
+      background: #111827;
+      color: white;
+      padding-top: 54px;
+      padding-bottom: 54px;
+      margin-top: 5rem;
     }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg,#6366f1,#ec4899);
-      transition: width .3s ease;
-      border-radius: 2px;
-    }
-    .nav-link:hover::after {
-      width: 100%;
-    }
-    footer {
-      background: #1f2937;
+    .footer-title {
+      color: white;
     }
     .social a {
       transition: transform .25s ease, color .25s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .social a:hover {
-      transform: scale(1.2);
-      color: #ec4899;
+      transform: scale(1.05);
+    }
+    .social img {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width: 768px) {
+      footer .grid {
+        text-align: center;
+      }
     }
   </style>
 </head>
-<body class="text-gray-900">
+<body>
 
   <!-- Header -->
-  <header class="sticky top-0 bg-white/95 backdrop-blur-md shadow-md z-30">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-5 py-4 gap-3">
-      <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+  <header class="sticky top-0 shadow-md z-30">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4 gap-4">
+      <div class="flex items-center gap-2">
+        <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+        <div class="badge">Portfolio</div>
+      </div>
       <nav class="flex gap-6 flex-wrap">
         <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
         <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
@@ -112,8 +180,8 @@
         <a href="contact.html" class="nav-link text-gray-700 hover:text-indigo-600">Contact</a>
       </nav>
       <div class="flex items-center gap-3 ml-auto">
-        <div class="language-toggle" data-lang="en" data-active="true">English</div>
-        <div class="language-toggle" data-lang="hi">हिन्दी</div>
+        <div class="language-toggle" data-lang="en" data-active="true">EN</div>
+        <div class="language-toggle" data-lang="hi">HI</div>
       </div>
     </div>
   </header>
@@ -139,27 +207,21 @@
             <div class="flex-1">
               <div class="flex flex-wrap gap-2 items-baseline">
                 <h2 class="text-2xl font-semibold lang-en">Who I Am</h2>
-                <h2 class="text-2xl font-semibold lang-hi lang-hide">मैं कौन हूँ</h2>
+                <h2 class="text-2xl font-semibold lang-hi hidden">मैं कौन हूँ</h2>
               </div>
               <p class="mt-2 text-gray-700 lang-en">
-1. I am an O Level student, working hard between my studies and my dreams.
-
-<br>2. I love learning and enjoy exploring new things.
-
-<br>3. Along with my studies, I am constantly improving my skills.
-
-<br>4. I have a strong interest in technology and web development.
-
-<br>5. I believe that with hard work and dedication, any goal can be achieved.
-
+1. I am an O Level student, working hard between my studies and my dreams.<br>
+2. I love learning and enjoy exploring new things.<br>
+3. Along with my studies, I am constantly improving my skills.<br>
+4. I have a strong interest in technology and web development.<br>
+5. I believe that with hard work and dedication, any goal can be achieved.
               </p>
-              <p class="mt-2 text-gray-700 lang-hi lang-hide">
-                1. मैं एक O Level का छात्र हूँ, जो अपनी पढ़ाई और सपनों के बीच मेहनत कर रहा हूँ।
-			<br> 2.  मुझे सीखने का शौक है और नई चीज़ों को एक्सप्लोर करना पसंद है।
-			<br> 3.  पढ़ाई के साथ-साथ मैं अपनी स्किल्स को भी लगातार सुधार रहा हूँ।
-			<br> 4.  टेक्नोलॉजी और वेब डेवलपमेंट में मेरी खास रुचि है।
-			 <br> 5. मैं मानता हूँ कि मेहनत और लगन से हर मंज़िल हासिल की जा सकती है।
-			
+              <p class="mt-2 text-gray-700 ">
+1. मैं एक O Level का छात्र हूँ, जो अपनी पढ़ाई और सपनों के बीच मेहनत कर रहा हूँ।<br>
+2. मुझे सीखने का शौक है और नई चीज़ों को एक्सप्लोर करना पसंद है।<br>
+3. पढ़ाई के साथ-साथ मैं अपनी स्किल्स को भी लगातार सुधार रहा हूँ।<br>
+4. टेक्नोलॉजी और वेब डेवलपमेंट में मेरी खास रुचि है।<br>
+5. मैं मानता हूँ कि मेहनत और लगन से हर मंज़िल हासिल की जा सकती है।
               </p>
             </div>
           </div>
@@ -176,118 +238,95 @@
             <div class="flex-1">
               <div class="flex flex-wrap gap-2 items-baseline">
                 <h2 class="text-2xl font-semibold lang-en">My Journey</h2>
-                <h2 class="text-2xl font-semibold lang-hi lang-hide">मेरा सफर</h2>
+                <h2 class="text-2xl font-semibold lang-hi hidden">मेरा सफर</h2>
               </div>
               <p class="mt-2 text-gray-700 lang-en">
-1. My journey was not easy, but every step made me stronger.
-
-<br>2. Small challenges gave me the courage to chase big dreams.
-
-<br>3. Instead of giving up, I chose the path of learning.
-
-<br>4. Every failure became an opportunity for a fresh start.
-
-<br>5. This journey taught me the value of patience and hard work.
-
-<br>6. The paths were tough, but my spirits always stayed high.
-
-<br>7. I kept struggling to achieve my dreams.
-
-<br>8. My journey is still going on, and I keep moving forward.
+1. My journey was not easy, but every step made me stronger.<br>
+2. Small challenges gave me the courage to chase big dreams.<br>
+3. Instead of giving up, I chose the path of learning.<br>
+4. Every failure became an opportunity for a fresh start.<br>
+5. This journey taught me the value of patience and hard work.<br>
+6. The paths were tough, but my spirits always stayed high.<br>
+7. I kept struggling to achieve my dreams.<br>
+8. My journey is still going on, and I keep moving forward.
               </p>
-              <p class="mt-2 text-gray-700 lang-hi lang-hide">
-                    1. मेरा सफर आसान नहीं था, लेकिन हर कदम ने मुझे मजबूत बनाया।
-				<br> 2. छोटी-छोटी चुनौतियों ने मुझे बड़े सपनों तक पहुंचने की हिम्मत दी।
-				 <br>3. मैंने हार मानने की जगह सीखने का रास्ता चुना।
-				 <br>4. हर असफलता मेरे लिए एक नई शुरुआत का अवसर बनी।
-				<br> 5. सफर ने मुझे धैर्य और मेहनत का महत्व सिखाया।
-				 <br>6. रास्ते कठिन थे, लेकिन हौसले हमेशा ऊंचे रहे।
-				 <br>7. मैंने अपने सपनों को पाने के लिए लगातार संघर्ष किया।
-				 <br>8. मेरा सफर आज भी जारी है, और मैं आगे बढ़ रहा हूँ।
+              <p class="mt-2 text-gray-700 ">
+1. मेरा सफर आसान नहीं था, लेकिन हर कदम ने मुझे मजबूत बनाया।<br>
+2. छोटी-छोटी चुनौतियों ने मुझे बड़े सपनों तक पहुंचने की हिम्मत दी।<br>
+3. मैंने हार मानने की जगह सीखने का रास्ता चुना।<br>
+4. हर असफलता मेरे लिए एक नई शुरुआत का अवसर बनी।<br>
+5. सफर ने मुझे धैर्य और मेहनत का महत्व सिखाया।<br>
+6. रास्ते कठिन थे, लेकिन हौसले हमेशा ऊँचे रहे।<br>
+7. मैंने अपने सपनों को पाने के लिए लगातार संघर्ष किया।<br>
+8. मेरा सफर आज भी जारी है, और मैं आगे बढ़ रहा हूँ।
               </p>
             </div>
           </div>
         </div>
-      </div>
-	  
-	   <!-- Card: Mera Safar -->
+
+        <!-- Card: Mera Passion -->
         <div class="card reveal bg-white rounded-xl p-6">
           <div class="flex items-start gap-5">
             <div class="w-20 h-20 flex-shrink-0">
               <div class="photo-container">
-                <img src="wallpaper16.jpg" alt="Journey" class="photo rounded-full">
+                <img src="wallpaper16.jpg" alt="Passion" class="photo rounded-full">
               </div>
             </div>
             <div class="flex-1">
               <div class="flex flex-wrap gap-2 items-baseline">
                 <h2 class="text-2xl font-semibold lang-en">❤️Mera Passion</h2>
-                <h2 class="text-2xl font-semibold lang-hi lang-hide">मेरा पैशन </h2>
+                <h2 class="text-2xl font-semibold lang-hi hidden">मेरा पैशन</h2>
               </div>
               <p class="mt-2 text-gray-700 lang-en">
-             
-1. My passion gives me the true reason to live.
-
- <br>2. When I follow my passion, I never feel tired.
-
- <br>3. Passion is the force that drives me forward.
-
- <br>4. For me, passion is not just work, it’s a devotion.
-
- <br>5. Every moment feels special when I work on my passion.
-
- <br>6. Passion inspires me to keep learning continuously.
-
+1. My passion gives me the true reason to live.<br>
+2. When I follow my passion, I never feel tired.<br>
+3. Passion is the force that drives me forward.<br>
+4. For me, passion is not just work, it’s a devotion.<br>
+5. Every moment feels special when I work on my passion.<br>
+6. Passion inspires me to keep learning continuously.
               </p>
-              <p class="mt-2 text-gray-700 lang-hi lang-hide">
-                   1. मेरा पैशन मुझे जीने की असली वजह देता है।
-				  <br>2. जब मैं अपने पैशन को फॉलो करता हूँ तो थकान महसूस नहीं होती।
-				  <br>3. पैशन ही वो ताकत है जो मुझे आगे बढ़ाती है।
-				  <br>4. मेरे लिए पैशन सिर्फ काम नहीं, बल्कि एक इबादत है।
-				  <br>5. जब मैं अपने पैशन पर काम करता हूँ तो हर पल खास लगता है।
-				  <br>6. पैशन मुझे हमेशा सीखते रहने की प्रेरणा देता है।
+              <p class="mt-2 text-gray-700 l">
+1. मेरा पैशन मुझे जीने की असली वजह देता है।<br>
+2. जब मैं अपने पैशन को फॉलो करता हूँ तो थकान महसूस नहीं होती।<br>
+3. पैशन ही वो ताकत है जो मुझे आगे बढ़ाती है।<br>
+4. मेरे लिए पैशन सिर्फ काम नहीं, बल्कि एक इबादत है।<br>
+5. जब मैं अपने पैशन पर काम करता हूँ तो हर पल खास लगता है।<br>
+6. पैशन मुझे हमेशा सीखते रहने की प्रेरणा देता है।
               </p>
             </div>
           </div>
         </div>
-      </div>
-	  
-	  <!-- Card: Mera Safar -->
+
+        <!-- Card: Web Dev Passion -->
         <div class="card reveal bg-white rounded-xl p-6">
           <div class="flex items-start gap-5">
             <div class="w-20 h-20 flex-shrink-0">
               <div class="photo-container">
-                <img src="wallpaper16.jpg" alt="Journey" class="photo rounded-full">
+                <img src="wallpaper16.jpg" alt="Web Dev" class="photo rounded-full">
               </div>
             </div>
             <div class="flex-1">
               <div class="flex flex-wrap gap-2 items-baseline">
                 <h2 class="text-2xl font-semibold lang-en">Passion for Web Development</h2>
-                <h2 class="text-2xl font-semibold lang-hi lang-hide">वेब डेवलपमेंट का जुनून</h2>
+                <h2 class="text-2xl font-semibold lang-hi hidden">वेब डेवलपमेंट का जुनून</h2>
               </div>
               <p class="mt-2 text-gray-700 lang-en">
-1. Web development is not just work for me, it’s my passion.
-
-<br>2. When I write code, I feel like I am creating something new.
-
-<br>3. Every website is a new story for me.
-
-<br>4. Each line of code turns my dreams into reality.
-
-<br>5. Learning new technologies is part of my passion.
-
-<br>6. When my website runs successfully, the joy is indescribable.
-
-<br>7. This passion gives me the strength to work day and night.
-
+1. Web development is not just work for me, it’s my passion.<br>
+2. When I write code, I feel like I am creating something new.<br>
+3. Every website is a new story for me.<br>
+4. Each line of code turns my dreams into reality.<br>
+5. Learning new technologies is part of my passion.<br>
+6. When my website runs successfully, the joy is indescribable.<br>
+7. This passion gives me the strength to work day and night.
               </p>
-              <p class="mt-2 text-gray-700 lang-hi lang-hide">
-                  1. वेब डेवलपमेंट मेरे लिए सिर्फ काम नहीं, एक जुनून है।
-				<br>2. जब मैं कोड लिखता हूँ, तो मुझे लगता है मैं कुछ नया रच रहा हूँ।
-				<br>3. हर वेबसाइट मेरे लिए एक नई कहानी है।
-				<br>4. कोड की हर लाइन मेरे सपनों को हकीकत बनाती है।
-				<br>5. नई-नई टेक्नोलॉजी सीखना मेरे जुनून का हिस्सा है।
-				<br>6. जब मेरी बनाई वेबसाइट चलती है, तो खुशी बयां नहीं की जा सकती।
-				<br>7. यह जुनून मुझे दिन-रात मेहनत करने की ताकत देता है।
+              <p class="mt-2 text-gray-700 ">
+1. वेब डेवलपमेंट मेरे लिए सिर्फ काम नहीं, एक जुनून है।<br>
+2. जब मैं कोड लिखता हूँ, तो मुझे लगता है मैं कुछ नया रच रहा हूँ।<br>
+3. हर वेबसाइट मेरे लिए एक नई कहानी है।<br>
+4. कोड की हर लाइन मेरे सपनों को हकीकत बनाती है।<br>
+5. नई-नई टेक्नोलॉजी सीखना मेरे जुनून का हिस्सा है।<br>
+6. जब मेरी बनाई वेबसाइट चलती है, तो खुशी बयां नहीं की जा सकती।<br>
+7. यह जुनून मुझे दिन-रात मेहनत करने की ताकत देता है।
               </p>
             </div>
           </div>
@@ -297,29 +336,31 @@
   </main>
 
   <!-- Footer -->
-  <footer class="text-white py-14 mt-16">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-5">
+  <footer class="footer-custom">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
       <div>
         <div class="footer-title text-xl font-semibold mb-2">Prayagraj👇</div>
-        <p class="text-sm">[Gaav: Bari Bajahiya, Belsara, Prayagraj,<br> Uttar Pradesh, 212106].</p>
+        <p class="text-sm">Gaav: Bari Bajahiya, Belsara, Prayagraj,<br>Uttar Pradesh, 212106.</p>
       </div>
       <div class="flex flex-col items-center">
         <div class="footer-title text-xl font-semibold mb-2">Social👇</div>
-        <div class="flex gap-6 text-2xl social">
-          <a href="#" aria-label="WhatsApp" class="hover:text-green-400"><img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png">whatsApp.com<i class="fab fa-whatsapp"></i></a>
-          <a href="#" aria-label="Instagram" class="hover:text-pink-400"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png">Instagram.com<i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn" class="hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+        <div class="flex gap-8 text-xl social">
+          <a href="#" aria-label="WhatsApp" class="hover:text-green-400 flex items-center gap-1">
+            <img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png" alt="whatsapp" class="w-5 h-5"> WhatsApp
+            <i class="fab fa-whatsapp ml-1"></i>
+          </a>
+          <a href="#" aria-label="Instagram" class="hover:text-pink-400 flex items-center gap-1">
+            <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="insta" class="w-5 h-5"> Instagram
+            <i class="fab fa-instagram ml-1"></i>
+          </a>
         </div>
       </div>
       <div>
         <div class="footer-title text-xl font-semibold mb-2">ASIT</div>
-        <p class="text-sm font-semibold">Padhaai:👇</p>
-        <p class="text-sm">'O' Level/ [ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
-        <p class="text-sm font-semibold mt-2">Shikshak:👇</p>
-        <p class="text-sm">👉Khurshid Alam Sir<br>👉Divyanshu Sir<br>👉Anil Sir</p>
+        <p class="text-sm">Padhai:👇<br>'O' Level<br>[ASIT INSTITUTE<br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
       </div>
     </div>
-    <div class="text-center text-xs mt-10 opacity-80">Rahul Kumar.</div>
+    <div class="text-center text-xs mt-10 opacity-70">Rahul Kumar.</div>
   </footer>
 
   <!-- Scripts -->
@@ -336,31 +377,34 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Language toggle logic
+    // Language toggle logic with hidden class
     const langToggles = document.querySelectorAll('.language-toggle');
+
+    function setLanguage(lang) {
+      if (lang === 'hi') {
+        document.querySelectorAll('.lang-en').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.lang-hi').forEach(el => el.classList.remove('hidden'));
+      } else {
+        document.querySelectorAll('.lang-hi').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('hidden'));
+      }
+      langToggles.forEach(b => b.setAttribute('data-active', 'false'));
+      const activeBtn = document.querySelector(`.language-toggle[data-lang="${lang}"]`);
+      if (activeBtn) activeBtn.setAttribute('data-active', 'true');
+
+      try { localStorage.setItem('preferredLang', lang); } catch {}
+    }
+
     langToggles.forEach(btn => {
       btn.addEventListener('click', () => {
-        langToggles.forEach(b => b.setAttribute('data-active', 'false'));
-        btn.setAttribute('data-active', 'true');
         const lang = btn.getAttribute('data-lang');
-        if (lang === 'hi') {
-          document.querySelectorAll('.lang-en').forEach(el => el.classList.add('lang-hide'));
-          document.querySelectorAll('.lang-hi').forEach(el => el.classList.remove('lang-hide'));
-        } else {
-          document.querySelectorAll('.lang-hi').forEach(el => el.classList.add('lang-hide'));
-          document.querySelectorAll('.lang-en').forEach(el => el.classList.remove('lang-hide'));
-        }
-        try { localStorage.setItem('preferredLang', lang); } catch {}
+        setLanguage(lang);
       });
     });
 
-    // Restore saved language
     document.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('preferredLang');
-      if (saved) {
-        const target = document.querySelector(`.language-toggle[data-lang="${saved}"]`);
-        if (target) target.click();
-      }
+      const saved = localStorage.getItem('preferredLang') || 'en';
+      setLanguage(saved);
     });
   </script>
 </body>
