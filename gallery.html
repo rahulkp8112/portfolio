@@ -1,132 +1,207 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="hi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gallery - Mera Website</title>
+  <title>Stacked Gallery with Header/Footer</title>
   <script src="https://kit.fontawesome.com/a2d9f6a24d.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Optional: better font -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --card-gradient-1: linear-gradient(135deg,#ff9a9e 0%,#fad0c4 100%);
+      --card-gradient-2: linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%);
+      --card-gradient-3: linear-gradient(135deg,#f6d365 0%,#fda085 100%);
+      --card-gradient-4: linear-gradient(135deg,#89f7fe 0%,#66a6ff 100%);
+      --card-gradient-5: linear-gradient(135deg,#fbc2eb 0%,#a6c1ee 100%);
+    }
     body {
       font-family: 'Inter', system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      background: linear-gradient(135deg,#f5f7fa,#ffffff);
+      background: linear-gradient(135deg,#e0e7ff,#cffafe);
       color: #1f2d3a;
+      scroll-behavior: smooth;
+      margin:0;
     }
     .gradient-text {
       background: linear-gradient(90deg,#6366f1,#ec4899);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1rem;
-      transition: transform .35s ease, box-shadow .35s ease;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 30px 60px -10px rgba(99,102,241,0.25);
-    }
-    .photo-container {
-       height: 90%;
-      overflow: hidden;
-      position: relative;
-      border-radius: .75rem;
-    }
-    .photo {
-      width: 100%;
-      display: block;
-      transition: transform .5s cubic-bezier(.4,.2,.2,1);
-    }
-    .photo-container:hover .photo {
-      transform: scale(1.15);
-    }
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .7s ease-out, transform .7s ease-out;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .language-toggle {
-      cursor: pointer;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      transition: background .25s, color .25s, transform .15s;
-      border: 1px solid transparent;
-      display: inline-block;
-    }
-    .language-toggle[data-active="true"] {
-      background: linear-gradient(135deg,#6366f1,#ec4899);
-      color: white;
-    }
-    .language-toggle:hover {
-      transform: scale(1.05);
-      background: rgba(99,102,241,0.08);
-      color: #4f46e5;
+    header {
+      backdrop-filter: saturate(180%) blur(12px);
+      background: rgba(255,255,255,0.9);
     }
     .nav-link {
       position: relative;
       font-weight: 600;
-      display: inline-block;
       padding-bottom: 2px;
+      display: inline-block;
+      color: #374151;
+      transition: color .2s ease;
     }
     .nav-link::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: -4px;
       width: 0;
       height: 3px;
       background: linear-gradient(90deg,#6366f1,#ec4899);
       transition: width .25s ease;
       border-radius: 2px;
     }
+    .nav-link:hover {
+      color: #6366f1;
+    }
     .nav-link:hover::after {
       width: 100%;
     }
-    footer {
-      background: #1f2937;
-      color: #e2e8f0;
-    }
-    .social a {
-      transition: transform .25s ease, color .25s ease;
-    }
-    .social a:hover {
-      transform: scale(1.15);
-      color: #ec4899;
-    }
-    .underline-accent {
+    .language-toggle {
+      cursor: pointer;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all .25s ease;
+      border: 1px solid transparent;
       position: relative;
     }
-    .underline-accent::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 50px;
-      height: 4px;
-      background: linear-gradient(90deg,#6366f1,#ec4899);
-      border-radius: 2px;
+    .language-toggle[data-active="true"] {
+      background: linear-gradient(135deg,#6366f1,#ec4899);
+      color: white;
     }
-    /* Responsive tweaks if needed */
+    .language-toggle:not([data-active="true"]):hover {
+      background: rgba(99,102,241,0.1);
+      color: #4f46e5;
+    }
+    .badge {
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      box-shadow: 0 15px 40px -10px rgba(99,102,241,0.3);
+      transition: transform .25s ease, filter .25s ease;
+    }
+    .badge:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    /* Gallery specific */
+    .gallery-stack {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      margin: auto;
+      perspective: 1500px;
+      overflow: visible;
+      padding-top: 56.25%;
+    }
+    .gallery-inner {
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      width: 100%;
+      height: 115%;
+      transform: translateX(-50%);
+    }
+    .stacked-img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100%;
+      height: 110%;
+      object-fit: cover;
+      border-radius: 1rem;
+      box-shadow: 0 25px 60px -10px rgba(0,0,0, .5);
+      cursor: grab;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      will-change: transform, opacity;
+      transform: translateX(-50%);
+    }
+    .control-panel {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      gap: 10px;
+      z-index: 999;
+    }
+    .control-arrow, .undo-btn {
+      background: rgba(255,255,255,0.85);
+      border-radius: 999px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 15px 40px -5px rgba(0,0,0,0.3);
+      transition: transform .2s ease;
+    }
+    .control-arrow:hover, .undo-btn:hover {
+      transform: scale(1.05);
+    }
+    .disabled {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+    .no-select {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .empty-msg {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Footer tweaks: height 20px kam karne ke liye padding adjust */
+    .footer-custom {
+      background: #111827;
+      color: white;
+      padding-top: 54px; /* pehle 64px tha (py-16), ab 54px => 10px kam upar */
+      padding-bottom: 54px; /* 10px kam neeche */
+      margin-top: 5rem;
+    }
+    footer p {
+      line-height: 1.4;
+    }
+    @media (max-width: 1024px) {
+      .gallery-stack {
+        padding-top: 75%;
+      }
+    }
+    @media (max-width: 768px) {
+      footer .grid {
+        text-align: center;
+      }
+      .gallery-stack {
+        padding-top: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header class="sticky top-0 bg-white/95 backdrop-blur-md shadow-md z-30">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-5 py-4 gap-3">
-      <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+  <header class="sticky top-0 shadow-md z-30">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4 gap-4">
+      <div class="flex items-center gap-2">
+        <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+        <div class="badge">Portfolio</div>
+      </div>
       <nav class="flex gap-6 flex-wrap">
         <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
         <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
@@ -134,138 +209,203 @@
         <a href="contact.html" class="nav-link text-gray-700 hover:text-indigo-600">Contact</a>
       </nav>
       <div class="flex items-center gap-3 ml-auto">
-        <div class="language-toggle" data-lang="en" data-active="true">English</div>
-        <div class="language-toggle" data-lang="hi">हिन्दी</div>
+        <div class="language-toggle" data-lang="en" data-active="true">EN</div>
+        <div class="language-toggle" data-lang="hi">HI</div>
       </div>
     </div>
   </header>
 
-  <!-- Main -->
-  <main class="max-w-7xl mx-auto px-5 py-16">
-    <div class="text-center mb-12">
-      <h1 class="text-5xl font-extrabold gradient-text mb-2">My lovely Friends And Bhai</h1>
-      <p class="text-gray-600"> Meri life ki kuch yaadein, pal aur nazare—yahan dekhiye.</p>
-    </div>
+  <!-- Gallery Section -->
+  <main class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-6 text-center gradient-text">My lovely Friends And Bhai</h2>
+      <div class="gallery-stack" aria-label="stacked image gallery">
+        <div class="gallery-inner">
+          <div class="control-panel">
+            <div id="removeBtn" class="control-arrow" aria-label="Remove top image">&larr;</div>
+            <div id="undoBtn" class="undo-btn disabled" aria-label="Undo last removal">&#8630;</div>
+          </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Gallery item 1 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper25.jpg" alt="Gallery1" class="photo w-full h-auto">
+          <!-- stacked images: web-friendly relative path -->
+          <img draggable="false" src="wallpaper25.jpg"  alt="gallery1" class="stacked-img no-select" data-index="0">
+          <img draggable="false" src="wallpaper1.jpg" alt="gallery2" class="stacked-img no-select" data-index="1">
+          <img draggable="false" src="wallpaper24.jpg" alt="gallery3" class="stacked-img no-select" data-index="2">
+          <img draggable="false" src="wallpaper7.jpg" alt="gallery4" class="stacked-img no-select" data-index="3">
+          <img draggable="false" src="wallpaper15.jpg" alt="gallery5" class="stacked-img no-select" data-index="4">
+          <img draggable="false" src="wallpaper16.jpg" alt="gallery6" class="stacked-img no-select" data-index="5">
+          <img draggable="false" src="wallpaper19.jpg" alt="gallery7" class="stacked-img no-select" data-index="6">
+          <img draggable="false" src="wallpaper21.jpg" alt="gallery8" class="stacked-img no-select" data-index="7">
+          <img draggable="false" src="wallpaper22.jpg" alt="gallery9" class="stacked-img no-select" data-index="8">
+          <img draggable="false" src="wallpaper23.jpg" alt="gallery10" class="stacked-img no-select" data-index="9">
         </div>
       </div>
-      <!-- Gallery item 2 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper24.jpg" alt="Gallery2" class="photo w-full h-auto">
-        </div>
-      </div>
-      <!-- Gallery item 3 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper3.jpg" alt="Gallery3" class="photo w-full h-auto">
-        </div>
-      </div>
-      <!-- Gallery item 4 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper23.jpg" alt="Gallery4" class="photo w-full h-auto">
-        </div>
-      </div>
-      <!-- Gallery item 5 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper18.jpg" alt="Gallery5" class="photo w-full h-auto">
-        </div>
-      </div>
-      <!-- Gallery item 6 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper19.jpg" alt="Gallery6" class="photo w-full h-auto">
-        </div>
-      </div>
-	  <!-- Gallery item 7 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper20.jpg" alt="Gallery6" class="photo w-full h-auto">
-        </div>
-      </div>
-	  <!-- Gallery item 8 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper21.jpg" alt="Gallery6" class="photo w-full h-auto">
-        </div>
-      </div>
-	   <!-- Gallery item 9 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper7.jpg" alt="Gallery6" class="photo w-full h-auto">
-        </div>
-      </div>
-	  <!-- Gallery item 10 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper22.jpg" alt="Gallery6" class="photo w-full h-auto">
-        </div>
-      </div>
-	   <!-- Gallery item 11 -->
-      <div class="card reveal">
-        <div class="photo-container">
-          <img src="wallpaper11.jpg" alt="Gallery6" class="photo w-full h-auto">
-        </div>
-      </div>
+      <p class="text-center mt-4 text-sm text-gray-600"></p>
+      <div id="empty" class="empty-msg" style="display:none;"></div>
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="py-14 mt-16">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-5">
+  <!-- Footer (height 20px kam) -->
+  <footer class="footer-custom">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
       <div>
         <div class="footer-title text-xl font-semibold mb-2">Prayagraj👇</div>
-        <p class="text-sm">[Gaav: Bari Bajahiya, Belsara, Prayagraj,<br> Uttar Pradesh, 212106].</p>
+        <p class="text-sm">Gaav: Bari Bajahiya, Belsara, Prayagraj,<br>Uttar Pradesh, 212106.</p>
       </div>
       <div class="flex flex-col items-center">
         <div class="footer-title text-xl font-semibold mb-2">Social👇</div>
-        <div class="flex gap-6 text-2xl social">
-          <a href="#" aria-label="WhatsApp" class="hover:text-green-400"><img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png">whatsApp.com<i class="fab fa-whatsapp"></i></a>
-          <a href="#" aria-label="Instagram" class="hover:text-pink-400"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png">Instagram.com<i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn" class="hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+        <div class="flex gap-8 text-xl social">
+          <a href="https://wa.me/918112391503" target="_blank" aria-label="WhatsApp" class="hover:text-green-400 flex items-center gap-1">
+            <img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png" alt="whatsapp" class="w-5 h-5"> WhatsApp
+            <i class="fab fa-whatsapp ml-1"></i>
+          </a>
+          <a href="https://www.instagram.com/rahul_kp_8112" target="_blank" aria-label="Instagram" class="hover:text-pink-400 flex items-center gap-1">
+            <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="insta" class="w-5 h-5"> Instagram
+            <i class="fab fa-instagram ml-1"></i>
+          </a>
         </div>
       </div>
       <div>
         <div class="footer-title text-xl font-semibold mb-2">ASIT</div>
-        <p class="text-sm font-semibold">Padhaai:👇</p>
-        <p class="text-sm">'O' Level/ [ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
-        <p class="text-sm font-semibold mt-2">Shikshak:👇</p>
-        <p class="text-sm">👉Khurshid Alam Sir<br>👉Divyanshu Sir<br>👉Anil Sir</p>
+        <p class="text-sm">Padhai:👇<br>'O' Level<br>[ASIT INSTITUTE<br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
       </div>
     </div>
-    <div class="text-center text-xs mt-10 opacity-80 text-gray-300">Rahul Kumar.</div>
+    <div class="text-center text-xs mt-10 opacity-70">Rahul Kumar.</div>
   </footer>
 
   <!-- Scripts -->
   <script>
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
+    // Drag & undo gallery logic
+    const galleryInner = document.querySelector('.gallery-inner');
+    const stack = galleryInner;
+    const removeBtn = document.getElementById('removeBtn');
+    const undoBtn = document.getElementById('undoBtn');
+    const emptyMsg = document.getElementById('empty');
+    let dragging = false;
+    let startX = 0;
+    let currentImg = null;
+    const threshold = 100;
+    const removedStack = [];
+
+    function refreshZIndices() {
+      const imgs = Array.from(stack.querySelectorAll('.stacked-img'));
+      imgs.forEach((img, idx) => {
+        img.style.zIndex = imgs.length - idx;
       });
-    }, { threshold: 0.2 });
+    }
 
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    function getTopImage() {
+      const images = Array.from(stack.querySelectorAll('.stacked-img'));
+      return images[0] || null;
+    }
 
-    // Language toggle (stub - extend as needed)
-    const langToggles = document.querySelectorAll('.language-toggle');
-    langToggles.forEach(btn => {
+    function updateUndoState() {
+      if (removedStack.length) undoBtn.classList.remove('disabled');
+      else undoBtn.classList.add('disabled');
+    }
+
+    function checkEmpty() {
+      if (!getTopImage()) {
+        emptyMsg.style.display = 'block';
+        removeBtn.classList.add('disabled');
+      } else {
+        emptyMsg.style.display = 'none';
+        removeBtn.classList.remove('disabled');
+      }
+    }
+
+    function removeTop(animated = true) {
+      const top = getTopImage();
+      if (!top) return;
+      const clone = top.cloneNode(true);
+      removedStack.push(clone);
+      updateUndoState();
+
+      if (animated) {
+        top.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+        top.style.transform = 'translateX(-120%) rotate(-20deg)';
+        top.style.opacity = '0';
+        setTimeout(() => {
+          top.remove();
+          refreshZIndices();
+          checkEmpty();
+        }, 450);
+      } else {
+        top.remove();
+        refreshZIndices();
+        checkEmpty();
+      }
+    }
+
+    function undoLast() {
+      if (!removedStack.length) return;
+      const last = removedStack.pop();
+      last.style.transform = 'translateX(-120%) rotate(-20deg)';
+      last.style.opacity = '0';
+      last.style.transition = 'none';
+      stack.insertBefore(last, stack.firstChild);
+      refreshZIndices();
+      requestAnimationFrame(() => {
+        last.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+        last.style.transform = '';
+        last.style.opacity = '1';
+        checkEmpty();
+      });
+      updateUndoState();
+    }
+
+    function pointerDown(e) {
+      if (dragging) return;
+      currentImg = getTopImage();
+      if (!currentImg) return;
+      dragging = true;
+      startX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+      currentImg.style.transition = 'none';
+      e.preventDefault();
+    }
+
+    function pointerMove(e) {
+      if (!dragging || !currentImg) return;
+      const currentX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+      const dx = currentX - startX;
+      if (dx < 0) currentImg.style.transform = `translateX(${dx - 50}%) rotate(${dx / 20}deg)`; // maintain centering while dragging
+    }
+
+    function pointerUp(e) {
+      if (!dragging || !currentImg) return;
+      const endX = e.type.startsWith('touch') ? (e.changedTouches[0]?.clientX || 0) : e.clientX;
+      const dx = endX - startX;
+      currentImg.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+      if (dx < -threshold) removeTop(true);
+      else currentImg.style.transform = 'translateX(-50%)';
+      dragging = false;
+      currentImg = null;
+    }
+
+    stack.addEventListener('pointerdown', pointerDown);
+    stack.addEventListener('pointermove', pointerMove);
+    stack.addEventListener('pointerup', pointerUp);
+    stack.addEventListener('pointerleave', pointerUp);
+    stack.addEventListener('touchstart', pointerDown, {passive:false});
+    stack.addEventListener('touchmove', pointerMove, {passive:false});
+    stack.addEventListener('touchend', pointerUp);
+
+    removeBtn.addEventListener('click', () => {
+      if (!removeBtn.classList.contains('disabled')) removeTop(true);
+    });
+    undoBtn.addEventListener('click', () => {
+      if (!undoBtn.classList.contains('disabled')) undoLast();
+    });
+
+    // initial
+    refreshZIndices();
+    updateUndoState();
+    checkEmpty();
+
+    // Language toggle stub
+    document.querySelectorAll('.language-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
-        langToggles.forEach(b => b.setAttribute('data-active', 'false'));
+        document.querySelectorAll('.language-toggle').forEach(b => b.setAttribute('data-active', 'false'));
         btn.setAttribute('data-active', 'true');
-        const lang = btn.getAttribute('data-lang');
-        // Placeholder: extend for multilingual captions or alt-texts
-        // Currently only sets active styling
       });
     });
   </script>
