@@ -6,69 +6,131 @@
   <title>Contact - Mera Website</title>
   <script src="https://kit.fontawesome.com/a2d9f6a24d.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Optional: better font -->
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
   <script>
     (function(){
-      emailjs.init("user_YOUR_PUBLIC_KEY"); // <-- yahan apni EmailJS public key daalein (e.g., user_xxx)
+      emailjs.init("user_YOUR_PUBLIC_KEY"); // <-- yahan apni EmailJS public key daalein
     })();
   </script>
 
   <style>
+    :root {
+      --card-gradient-1: linear-gradient(135deg,#ff9a9e 0%,#fad0c4 100%);
+      --card-gradient-2: linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%);
+      --card-gradient-3: linear-gradient(135deg,#f6d365 0%,#fda085 100%);
+      --card-gradient-4: linear-gradient(135deg,#89f7fe 0%,#66a6ff 100%);
+      --card-gradient-5: linear-gradient(135deg,#fbc2eb 0%,#a6c1ee 100%);
+    }
+
     body {
       font-family: 'Inter', system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      background: linear-gradient(135deg,#f0f4f8,#ffffff);
+      background: linear-gradient(135deg,#e0e7ff,#cffafe);
       color: #1f2d3a;
+      scroll-behavior: smooth;
+      margin: 0;
     }
+
     .gradient-text {
       background: linear-gradient(90deg,#6366f1,#ec4899);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
+    header {
+      backdrop-filter: saturate(180%) blur(12px);
+      background: rgba(255,255,255,0.9);
+    }
+
+    .nav-link {
+      position: relative;
+      font-weight: 600;
+      padding-bottom: 2px;
+      display: inline-block;
+      color: #374151;
+      transition: color .2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      transition: width .25s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover {
+      color: #6366f1;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .language-toggle {
+      cursor: pointer;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all .25s ease;
+      border: 1px solid transparent;
+      position: relative;
+    }
+    .language-toggle[data-active="true"] {
+      background: linear-gradient(135deg,#6366f1,#ec4899);
+      color: white;
+    }
+    .language-toggle:not([data-active="true"]):hover {
+      background: rgba(99,102,241,0.1);
+      color: #4f46e5;
+    }
+
+    .badge {
+      background: linear-gradient(90deg,#6366f1,#ec4899);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      box-shadow: 0 15px 40px -10px rgba(99,102,241,0.3);
+      transition: transform .25s ease, filter .25s ease;
+    }
+    .badge:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
     .card {
-      background: white;
-      border-radius: 1rem;
       position: relative;
       overflow: hidden;
       transition: transform .35s ease, box-shadow .35s ease;
+      background: white;
+      border-radius: 1rem;
     }
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 25px 50px -10px rgba(99,102,241,0.2);
+      box-shadow: 0 30px 60px -10px rgba(99,102,241,0.2);
     }
+
     .reveal {
       opacity: 0;
-      transform: translateY(25px);
+      transform: translateY(20px);
       transition: opacity .7s ease-out, transform .7s ease-out;
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .language-toggle {
-      cursor: pointer;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      transition: background .25s, color .25s, transform .15s;
-      border: 1px solid transparent;
-      display: inline-block;
-    }
-    .language-toggle[data-active="true"] {
-      background: linear-gradient(135deg,#6366f1,#ec4899);
-      color: white;
-    }
-    .language-toggle:hover {
-      transform: scale(1.05);
-      background: rgba(99,102,241,0.1);
-      color: #4f46e5;
-    }
+
     .photo-container {
       overflow: hidden;
       border-radius: .75rem;
@@ -84,6 +146,7 @@
     .photo-container:hover .photo {
       transform: scale(1.12);
     }
+
     .input-shadow {
       box-shadow: 0 8px 24px -4px rgba(100,116,139,0.08);
     }
@@ -91,49 +154,56 @@
       outline: 3px solid rgba(99,102,241,0.7);
       outline-offset: 2px;
     }
-    .nav-link {
-      position: relative;
-      font-weight: 600;
-      display: inline-block;
-      padding-bottom: 2px;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 3px;
-      background: linear-gradient(90deg,#6366f1,#ec4899);
-      transition: width .25s ease;
-      border-radius: 2px;
-    }
-    .nav-link:hover::after {
-      width: 100%;
-    }
-    footer {
-      background: #1f2937;
-      color: #e2e8f0;
-    }
-    .social a {
-      transition: transform .25s ease, color .25s ease;
-    }
-    .social a:hover {
-      transform: scale(1.15);
-      color: #ec4899;
-    }
+
     .error-text {
       font-size: .65rem;
       color: #dc2626;
+    }
+
+    .lang-hide {
+      display: none;
+    }
+
+    footer.footer-custom {
+      background: #111827;
+      color: white;
+      padding-top: 54px;
+      padding-bottom: 54px;
+      margin-top: 5rem;
+    }
+    .footer-title {
+      color: white;
+    }
+    .social a {
+      transition: transform .25s ease, color .25s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .social a:hover {
+      transform: scale(1.05);
+    }
+    .social img {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width: 768px) {
+      footer .grid {
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header class="sticky top-0 bg-white/95 backdrop-blur-md shadow-md z-30">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-5 py-4 gap-3">
-      <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+  <header class="sticky top-0 shadow-md z-30">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-6 py-4 gap-4">
+      <div class="flex items-center gap-2">
+        <div class="text-2xl font-extrabold text-indigo-600">Rahul Kumar</div>
+        <div class="badge">Contact</div>
+      </div>
       <nav class="flex gap-6 flex-wrap">
         <a href="index.html" class="nav-link text-gray-700 hover:text-indigo-600">Home</a>
         <a href="about.html" class="nav-link text-gray-700 hover:text-indigo-600">About</a>
@@ -141,8 +211,8 @@
         <a href="contact.html" class="nav-link text-gray-700 hover:text-indigo-600">Contact</a>
       </nav>
       <div class="flex items-center gap-3 ml-auto">
-        <div class="language-toggle" data-lang="en" data-active="true">English</div>
-        <div class="language-toggle" data-lang="hi">हिन्दी</div>
+        <div class="language-toggle" data-lang="en" data-active="true">EN</div>
+        <div class="language-toggle" data-lang="hi">HI</div>
       </div>
     </div>
   </header>
@@ -167,7 +237,7 @@
           <p class="lang-en text-gray-700">
             Aap mujhse sampark karne ke liye niche form bhar sakte hain ya direct email bhej sakte hain.
           </p>
-          <p class="lang-hi lang-hide text-gray-700">
+          <p class="lang-hi hidden text-gray-700">
             आप मुझसे संपर्क करने के लिए नीचे का फॉर्म भर सकते हैं या सीधे ईमेल भेज सकते हैं।
           </p>
 
@@ -210,29 +280,31 @@
   </main>
 
   <!-- Footer -->
-  <footer class="py-14 mt-16">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-5">
+  <footer class="footer-custom">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
       <div>
-        <div class="footer-title text-xl font-semibold mb-2 text-white">Prayagraj👇</div>
-        <p class="text-sm text-gray-300">[Gaav: Bari Bajahiya, Belsara, Prayagraj,<br> Uttar Pradesh, 212106].</p>
+        <div class="footer-title text-xl font-semibold mb-2">Prayagraj👇</div>
+        <p class="text-sm">Gaav: Bari Bajahiya, Belsara, Prayagraj,<br>Uttar Pradesh, 212106.</p>
       </div>
       <div class="flex flex-col items-center">
-        <div class="footer-title text-xl font-semibold mb-2 text-white">Social👇</div>
-        <div class="flex gap-6 text-2xl social">
-          <a href="#" aria-label="WhatsApp" class="hover:text-green-400"><img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png">whatsApp.com<i class="fab fa-whatsapp"></i></a>
-          <a href="#" aria-label="Instagram" class="hover:text-pink-400"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png">Instagram.com<i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn" class="hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+        <div class="footer-title text-xl font-semibold mb-2">Social👇</div>
+        <div class="flex gap-8 text-xl social">
+          <a href="https://wa.me/918112391503" target="_blank" aria-label="WhatsApp" class="hover:text-green-400 flex items-center gap-1">
+            <img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png" alt="whatsapp" class="w-5 h-5"> WhatsApp
+            <i class="fab fa-whatsapp ml-1"></i>
+          </a>
+          <a href="https://www.instagram.com/rahul_kp_8112" target="_blank" aria-label="Instagram" class="hover:text-pink-400 flex items-center gap-1">
+            <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="insta" class="w-5 h-5"> Instagram
+            <i class="fab fa-instagram ml-1"></i>
+          </a>
         </div>
       </div>
       <div>
-        <div class="footer-title text-xl font-semibold mb-2 text-white">ASIT</div>
-        <p class="text-sm font-semibold text-gray-300">Padhaai:👇</p>
-        <p class="text-sm text-gray-300">'O' Level/ [ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
-        <p class="text-sm font-semibold mt-2 text-gray-300">Shikshak:👇</p>
-        <p class="text-sm text-gray-300">👉Khurshid Alam Sir<br>👉Divyanshu Sir<br>👉Anil Sir</p>
+        <div class="footer-title text-xl font-semibold mb-2">ASIT</div>
+        <p class="text-sm">Padhai:👇<br>'O' Level<br>[ASIT INSTITUTE<br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
       </div>
     </div>
-    <div class="text-center text-xs mt-10 opacity-80 text-gray-400">Rahul Kumar.</div>
+    <div class="text-center text-xs mt-10 opacity-70">Rahul Kumar.</div>
   </footer>
 
   <!-- Scripts -->
@@ -248,24 +320,33 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Language toggle
+    // Language toggle (EN/HI) using hidden class
     const langToggles = document.querySelectorAll('.language-toggle');
+
+    function setLanguage(lang) {
+      if (lang === 'hi') {
+        document.querySelectorAll('.lang-en').forEach(e => e.classList.add('hidden'));
+        document.querySelectorAll('.lang-hi').forEach(e => e.classList.remove('hidden'));
+      } else {
+        document.querySelectorAll('.lang-hi').forEach(e => e.classList.add('hidden'));
+        document.querySelectorAll('.lang-en').forEach(e => e.classList.remove('hidden'));
+      }
+      langToggles.forEach(b => b.setAttribute('data-active', 'false'));
+      const activeBtn = document.querySelector(`.language-toggle[data-lang="${lang}"]`);
+      if (activeBtn) activeBtn.setAttribute('data-active', 'true');
+      try { localStorage.setItem('preferredLang', lang); } catch {}
+    }
+
     langToggles.forEach(btn => {
       btn.addEventListener('click', () => {
-        langToggles.forEach(b => b.setAttribute('data-active', 'false'));
-        btn.setAttribute('data-active', 'true');
-        const lang = btn.getAttribute('data-lang');
-        if (lang === 'hi') {
-          document.querySelectorAll('.lang-en').forEach(e => e.classList.add('lang-hide'));
-          document.querySelectorAll('.lang-hi').forEach(e => e.classList.remove('lang-hide'));
-        } else {
-          document.querySelectorAll('.lang-hi').forEach(e => e.classList.add('lang-hide'));
-          document.querySelectorAll('.lang-en').forEach(e => e.classList.remove('lang-hide'));
-        }
+        setLanguage(btn.getAttribute('data-lang'));
       });
     });
-    // Initialize default
-    document.querySelector('[data-lang="en"]')?.click();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('preferredLang') || 'en';
+      setLanguage(saved);
+    });
 
     // EmailJS form submit
     const form = document.getElementById('contact-form');
@@ -297,17 +378,15 @@
 
       if (!valid) return;
 
-      // Prepare template params
       const templateParams = {
         from_name: name.value.trim(),
         reply_to: email.value.trim(),
         message: message.value.trim()
       };
 
-      // Send email via EmailJS
       emailjs.send("service_YOUR_SERVICE_ID", "template_YOUR_TEMPLATE_ID", templateParams)
         .then(function(response) {
-          alert("Message bhej diya gaya!"); // success
+          alert("Message bhej diya gaya!");
           form.reset();
         }, function(error) {
           console.error("EmailJS error:", error);
