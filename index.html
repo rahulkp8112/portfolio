@@ -133,7 +133,6 @@
       transform: translateY(0);
     }
   
- 
     /* Social icon transition */
     .social a {
       transition: transform 0.2s ease, opacity 0.2s ease;
@@ -142,11 +141,38 @@
       transform: scale(1.1);
       opacity: 0.9;
     }
-    /* Footer small text */
-    footer p {
+    /* Footer tweaks to match the previous design */
+    .footer-custom {
+      background: #111827;
+      color: white;
+      padding-top: 54px;
+      padding-bottom: 54px;
+      margin-top: 5rem;
+    }
+    .footer-title {
+      color: white;
+    }
+    .footer-custom p {
       line-height: 1.4;
     }
-    /* Responsive adjustment: center columns on small screens */
+    .footer-social a {
+      transition: transform .25s ease, color .25s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: inherit;
+    }
+    .footer-social a:hover {
+      transform: scale(1.05);
+    }
+    .footer-social img {
+      width: 18px;
+      height: 18px;
+    }
+    .text-small-muted {
+      opacity: 0.7;
+    }
+
     @media (max-width: 768px) {
       footer .grid {
         text-align: center;
@@ -205,7 +231,6 @@ Apne projects ke through main real-world problems ka solution create karne ki ko
 Discipline, dedication aur creativity meri strength hai jo mujhe alag banati hai.
 Mera aim hai ki apne skills ko use karke ek positive impact create karun.
 Main believe karta hoon ki learning ek continuous process hai jo kabhi khatam nahi hoti.
-
 </p>
             <div class="mt-4">
               <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Profile</span>
@@ -262,7 +287,7 @@ Technology ke legends jaise Steve Jobs aur Sundar Pichai mujhe inspire karte hai
 Mujhe apne teachers aur mentors se bhi motivation milti hai jo mujhe sahi direction dikhate hain.
 Internet pe successful developers aur creators ki journey dekh kar mujhe apne dreams pe kaam karne ka junoon milta hai.
 Main believe karta hoon ki challenges hamesha ek nayi opportunity lekar aate hain.
-Mere liye har din ek nayi learning ka chance hai jo mujhe future ke liye s</p>
+Mere liye har din ek nayi learning ka chance hai jo mujhe future ke liye stronger banata hai.</p>
             <div class="mt-4">
               <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Inspiration</span>
             </div>
@@ -281,9 +306,7 @@ Long-term me main ek successful web developer aur digital creator banna chahta h
 Mera aim hai ki aisi websites aur applications banaun jo logon ki real-life problems solve karein.
 Main apne career me continuous learning aur new technologies ke saath updated rehne ka plan rakhta hoon.
 Future me apna ek startup launch karna bhi mere big dreams me se ek hai.
-Mujhe pata hai ki hard work, dedication aur passion ke saath main apne goals achieve kar sakta hoon.
-
-</p>
+Mujhe pata hai ki hard work, dedication aur passion ke saath main apne goals achieve kar sakta hoon.</p>
             <div class="mt-4">
               <span class="text-xs font-medium uppercase tracking-wide text-indigo-800">Goals</span>
             </div>
@@ -293,37 +316,31 @@ Mujhe pata hai ki hard work, dedication aur passion ke saath main apne goals ach
     </section>
   </main>
 
- <!-- Head me Font Awesome include karein -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-k6RqeWeci5ZR/Lv4MR0sA0FfDOMsZs9xAqTyVCE5Q+Xk5z6d6Xv6FjG5K0g4oK6P1MZQ+fIBVx9WfXw5x5Kkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<!-- Footer -->
-<footer class="bg-gray-900 text-white py-16 mt-20">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
-    <div>
-      <div class="footer-title text-xl font-semibold mb-2">Prayagraj👇</div>
-      <p class="text-sm">[Gaav: Bari Bajahiya, Belsara, Prayagraj,<br> Uttar Pradesh, 212106].</p>
-    </div>
-    <div class="flex flex-col items-center">
-      <div class="footer-title text-xl font-semibold mb-2">Social👇</div>
-      <div class="flex gap-8 text-x1 social">
-        <!-- WhatsApp -->
-        <a href="https://wa.me/918112391503" target="_blank" aria-label="WhatsApp" class="hover:text-green-400"><img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png">whatsApp.com
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/rahul_kp_8112" target="_blank" aria-label="Instagram" class="hover:text-pink-400"><img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png">Instagram.com
-          <i class="fab fa-instagram"></i>
-        </a>
+  <!-- Footer (updated to match the earlier footer styling) -->
+  <footer class="footer-custom">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-6">
+      <div>
+        <div class="footer-title text-xl font-semibold mb-2">Prayagraj👇</div>
+        <p class="text-sm">Gaav: Bari Bajahiya, Belsara, Prayagraj,<br>Uttar Pradesh, 212106.</p>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="footer-title text-xl font-semibold mb-2">Social👇</div>
+        <div class="flex gap-8 text-xl footer-social">
+          <a href="https://wa.me/918112391503" target="_blank" aria-label="WhatsApp" class="hover:text-green-400">
+            <img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png" alt="whatsapp"> WhatsApp <i class="fab fa-whatsapp ml-1"></i>
+          </a>
+          <a href="https://www.instagram.com/rahul_kp_8112" target="_blank" aria-label="Instagram" class="hover:text-pink-400">
+            <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt="insta"> Instagram <i class="fab fa-instagram ml-1"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title text-xl font-semibold mb-2">ASIT</div>
+        <p class="text-sm">Padhai:👇<br> 'O' Level<br>[ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
       </div>
     </div>
-    <div>
-      <div class="footer-title text-xl font-semibold mb-2">ASIT</div>
-      <p class="text-sm">Padhai:👇<br> 'O' Level<br>[ASIT INSTITUTE <br>Gauhania, Jasra, Prayagraj - 212107 (U.P.)]</p>
-    </div>
-  </div>
-  <div class="text-center text-xs mt-10 opacity-70">Rahul Kumar.</div>
-</footer>
-
+    <div class="text-center text-xs mt-10 text-small-muted">Rahul Kumar.</div>
+  </footer>
 
   <!-- Scripts -->
   <script>
@@ -343,7 +360,6 @@ Mujhe pata hai ki hard work, dedication aur passion ke saath main apne goals ach
       btn.addEventListener('click', () => {
         document.querySelectorAll('.language-toggle').forEach(b => b.setAttribute('data-active', 'false'));
         btn.setAttribute('data-active', 'true');
-        // future: switch text language if content multilingual
       });
     });
   </script>
